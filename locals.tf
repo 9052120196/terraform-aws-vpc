@@ -10,7 +10,7 @@ locals {
 vpcfinaltags = merge (
 local.commons_tags,
 {
-    name = "${var.project}-${var.environment}"
+    Name = "${var.project}-${var.environment}"
 }
 
 )
