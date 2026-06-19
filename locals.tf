@@ -1,5 +1,5 @@
 locals {
-    commons_tag = {
+    commons_tags = {
             name = var.project
             environment = var.environment
             terraform = "true"
@@ -8,7 +8,7 @@ locals {
 
 
 vpcfinaltags = merge (
-local.commons_tag,
+local.commons_tags,
 {
     name = "${var.project}-${var.environment}"
 }
