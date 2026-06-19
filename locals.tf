@@ -7,8 +7,8 @@ locals {
     }
 
 
-vpc_final_tags = merge (
-local.commom_tags,
+vpcfinaltags = merge (
+local.commons_tags,
 {
     name = "${var.project}-${var.environment}"
 }
