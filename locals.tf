@@ -4,7 +4,7 @@ locals {
             environment = var.environment
             terraform = "true"
         }
-    }
+    
 
 
 vpcfinaltags = merge (
@@ -14,3 +14,5 @@ local.commons_tags,
 }
 
 )
+
+}
