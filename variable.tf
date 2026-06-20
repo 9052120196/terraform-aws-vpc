@@ -68,3 +68,14 @@ variable "Database_route_table_tags"{
     type= map 
     default={}
 }
+
+variable "aws_eip_tags"{
+
+    type= map 
+    default={}
+}
+
+variable "aws_nat_gateway_tags"{
+    type= map 
+    default={}
+}
