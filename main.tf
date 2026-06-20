@@ -66,7 +66,7 @@ resource "aws_subnet" "Database" {
 }
 
 resource "aws_route_table" "public" {
-  vpc_id = aws_vpc.example.id
+  vpc_id = aws_vpc.main.id
 
   tags = merge(
      local.commons_tags,
@@ -78,7 +78,7 @@ resource "aws_route_table" "public" {
   }
 
 resource "aws_route_table" "private" {
-  vpc_id = aws_vpc.example.id
+  vpc_id = aws_vpc.main.id
 
   tags = merge(
      local.commons_tags,
@@ -90,7 +90,7 @@ resource "aws_route_table" "private" {
   }
 
   resource "aws_route_table" "Database" {
-  vpc_id = aws_vpc.example.id
+  vpc_id = aws_vpc.main.id
 
   tags = merge(
      local.commons_tags,
