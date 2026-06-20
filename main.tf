@@ -29,3 +29,75 @@ resource "aws_subnet" "public" {
    var.public_subnet_tags
   )
 }
+
+
+# private subnets 
+resource "aws_subnet" "private" {
+  count              = length(var.private_subnet_cidrs)
+  vpc_id             = aws_vpc.main.id
+  cidr_block         = var.private_subnet_cidrs[count.index]
+  availability_zone = local.az_names[count.index]
+
+
+  tags = merge(
+     local.commons_tags,
+    {
+    Name = "${var.project}-${var.environment}-private-${local.az_names[count.index]}"
+    },
+   var.private_subnet_tags
+  )
+}
+
+# Database subnet 
+resource "aws_subnet" "Database" {
+  count              = length(var.Database_subnet_cidrs)
+  vpc_id             = aws_vpc.main.id
+  cidr_block         = var.Database_subnet_cidrs[count.index]
+  availability_zone = local.az_names[count.index]
+  
+
+  tags = merge(
+     local.commons_tags,
+    {
+    Name = "${var.project}-${var.environment}-Database-${local.az_names[count.index]}"
+    },
+   var.Database_subnet_tags
+  )
+}
+
+resource "aws_route_table" "public" {
+  vpc_id = aws_vpc.example.id
+
+  tags = merge(
+     local.commons_tags,
+    {
+    Name = "${var.project}-${var.environment}-public"
+    },
+   var.public_route_table_tags
+  )
+  }
+
+resource "aws_route_table" "private" {
+  vpc_id = aws_vpc.example.id
+
+  tags = merge(
+     local.commons_tags,
+    {
+    Name = "${var.project}-${var.environment}-private"
+    },
+   var.private_route_table_tags
+  )
+  }
+
+  resource "aws_route_table" "Database" {
+  vpc_id = aws_vpc.example.id
+
+  tags = merge(
+     local.commons_tags,
+    {
+    Name = "${var.project}-${var.environment}-Database"
+    },
+   var.Database_route_table_tags
+  )
+  }
+
